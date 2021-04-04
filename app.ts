@@ -19,3 +19,22 @@ userInput = 'Adam';
 if (typeof userInput === 'string') {
   userName = userInput;
 }
+
+//never is another type that functions can return
+//a function like this will always crash the script
+//and will NEVER have a return value
+//so if you want to console.log the result such function
+//you will get nothing back
+//never is a newer type than void and not had been added
+//to type inference so hovering over the function will
+//say :void. it's not horrible but with never you can make it
+// really clear that this function will never return anything!
+function generateError(message: string, code: number): never {
+  throw {
+    message: message,
+    errorCode: code,
+  };
+}
+
+const result = generateError('An error occured', 500);
+console.log(result);
