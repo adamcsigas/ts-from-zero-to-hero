@@ -36,7 +36,7 @@ by default it's better let type interference do it's thing :)
 //enum makes this easier! enum is a custom type
 enum Role { ADMIN, READ_ONLY, AUTHOR }; 
 //behind the scenes every element recieves an index by default ADMIN the number 0, READ_ONLY the number 1 and so on
-//if you need diferent behaviour you can change the number simply: ADMIN = 5. 
+//if you need different behaviour you can change the number simply: ADMIN = 5. 
 //after that the upcoming element will be 6 and so on
 
 const person = {
@@ -71,3 +71,11 @@ for (const hobby of person.hobbies) {
 if(person.role === Role.ADMIN) {
   console.log('admin');
 }
+
+//some notes on the last type which was mentioned: any
+//although it sounds good at first but you want avoid the type any
+//anywhere it's possible because it has a great disadvantage to take
+//away TS strictness about types. It can be used as a fallback when
+//you really can't know what kind of data will be stored in there
+//and then you can maybe use some runtime checks
+//by default: you want to avoid using any by any mean!!! .-)
