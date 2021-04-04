@@ -1,31 +1,31 @@
-function add(
-  n1: number,
-  n2: number,
-  showResult: boolean,
-  phrase: string
-) {
-  const result = n1 + n2;
-  if (showResult) {
-    console.log(phrase + result);
-  } else {
-    return result;
-  }
+/* this approach is only for demo purpose it's not best practice!
+L2-5 is a typescript representation of an object's type
+ const person : {
+  name: string;
+  age: number;
+} = {
+  name: 'Adam',
+  age: 29,
+}; */
+
+//it's better let type interference do it's thing :)
+const person = {
+  name: 'Adam',
+  age: 29,
+  hobbies: [
+    'sports',
+    'cooking',
+  ],
+};
+
+let favoriteActivities: string[];
+favoriteActivities = ['sports'];
+
+console.log(person.name);
+
+//typescript interference says that a hobby is going to be a string, so all
+//built in string function will be available
+for (const hobby of person.hobbies) {
+  console.log(hobby.toUpperCase());
+  //but for instance we would get an error on console.log(hobby.map());
 }
-
-// The reason why we don't use type assignments here is because typescript has a built in function called type inference
-// this means typescript does it's best to understand which type you have in a certain variable or const
-// for instance initialize the number1 variable:
-// with const number1 = 5, it's type going to be not just any number but :5
-// if you use let number1 = 5 it's goint to be :number
-// and of course you could give it's type explicitly like let number1: number = 5 (the code will not rely on type inference
-// in this case)
-// but that is unnecessary since TS can perfectly tell what is the type is going to be (reduntant code)
-
-const number1 = 5;
-const number2 = 2.8;
-const printResult = typeof number1 === 'number' && typeof number2 === 'number';
-const resultPhrase = 'Result is: ';
-
-const result = add(number1, number2, printResult, resultPhrase);
-
-console.log(result);
