@@ -52,7 +52,7 @@ const person = {
 //by default we could do
 //person.role.push('admin'); or person.role[1] = 10;
 //because typescript doesn't know that we want only 2 elements
-//typescript interference works it says role can be a type of string | number[]
+//typescript type inference works it says role can be a type of string | number[]
 //but we explicitly want to override it
 //with tuple types of the elements and the length is fixated
 
