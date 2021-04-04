@@ -12,10 +12,15 @@
 //by this we can gain some extra type safety
 //this is especially useful in conjunction with union types
 
+//type alias concept "custom type"
+//notes: you can not use built in functions' names as a name,
+type Combinable = number | string;
+type ConversionDescriptor = 'as-number' | 'as-text'; //the value by itself called literal type*
+
 function combine(
-  input1: number | string,
-  input2: number | string,
-  resultConversion: 'as-number' | 'as-text' //this called literal type*
+  input1: Combinable,
+  input2: Combinable,
+  resultConversion: ConversionDescriptor
   ) {
   let result;
 
