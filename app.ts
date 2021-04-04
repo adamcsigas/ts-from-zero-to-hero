@@ -13,3 +13,16 @@ function printResult(num: number): void {
 }
 
 printResult(add(5,12));
+
+//Functions as types called function type (dah!)
+//you can define a variable to be a function, and how it should look like
+//in other words: which type of functions we want to use somewhere
+
+let combineValues: (a: number, b: number) => number; //by that we say TS that we have a var which is a func that will take 2 params and will return with a number
+combineValues = add;
+//combineValues = printResult;
+//combineValues = 5;
+
+console.log(combineValues(8, 8));
+
+//let someValue: undefined; <-- this is a valid TS variable
