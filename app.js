@@ -9,6 +9,18 @@ function add(n1, n2) {
 function printResult(num) {
     console.log('Result: ' + num);
 }
+//function types and callbacks
+//returning void here gives the information that anything you might return will not be used
+//the parameter types on the otherhand is enforced!
+//cb functions can return something, even if the argument on which they're passed
+//does NOT expect a returned value.
+function addAndHandle(n1, n2, callback) {
+    var result = n1 + n2;
+    callback(result);
+}
+addAndHandle(10, 20, function (result) {
+    console.log(result);
+});
 printResult(add(5, 12));
 //Functions as types called function type (dah!)
 //you can define a variable to be a function, and how it should look like

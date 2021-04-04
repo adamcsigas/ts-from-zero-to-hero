@@ -12,6 +12,20 @@ function printResult(num: number): void {
   console.log('Result: ' + num);
 }
 
+//function types and callbacks
+//returning void here gives the information that anything you might return will not be used
+//the parameter types on the otherhand is enforced!
+//cb functions can return something, even if the argument on which they're passed
+//does NOT expect a returned value.
+function addAndHandle(n1: number, n2: number, callback: (num: number) => void) {
+  const result = n1 + n2;
+  callback(result);
+}
+
+addAndHandle(10, 20, (result) => {
+  console.log(result);
+})
+
 printResult(add(5,12));
 
 //Functions as types called function type (dah!)
