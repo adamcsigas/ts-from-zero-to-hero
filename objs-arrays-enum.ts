@@ -1,6 +1,6 @@
 /* this approach is only for demo purpose it's not best practice!
 L2-5 is a typescript representation of an object's type
-by default it's better let type interference do it's thing :)
+by default it's better let type inference do it's thing :)
  const person : {
   name: string;
   age: number;
@@ -61,7 +61,7 @@ favoriteActivities = ['sports'];
 
 console.log(person.name);
 
-//typescript interference can tell that a hobby is going to be a string, so all
+//typescript inference can tell that a hobby is going to be a string, so all
 //built in string function will be available
 for (const hobby of person.hobbies) {
   console.log(hobby.toUpperCase());
