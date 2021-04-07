@@ -20,6 +20,7 @@ var Person = /** @class */ (function () {
 }());
 var user1;
 user1 = new Person('Adam');
+//user1.name = 'Tadam'; this will throw error because it's a readonly prop in the interface
 user1.greet('Hi there - I am');
 //why do we have an interface, not a type?
 //while most of the time they are interchangable

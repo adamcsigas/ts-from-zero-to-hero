@@ -8,11 +8,17 @@
 //some concrete implementation for a method
 //or have a concrete value for a property
 
+//you can also combine interfaces
+//use-case: app where some object you only want to force Name,
+//on other objects you want to force them both.
+//you can merge as many interfaces together as many you want
+//you can implement as many interfaces into your class as many you need
+interface Named {
+  readonly name: string; //readonly has an effect on the class as well which implements the interface!
+}
 
 //idea behind it: you can typecheck an object
-interface Greetable {
-  name: string;
-
+interface Greetable extends Named {
   greet(phrase: string): void;
 }
 
@@ -33,6 +39,7 @@ class Person implements Greetable {
 let user1: Greetable;
 
 user1 = new Person('Adam');
+//user1.name = 'Tadam'; this will throw error because it's a readonly prop in the interface
 
 user1.greet('Hi there - I am');
 
