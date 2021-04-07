@@ -1,3 +1,4 @@
+export default '';
 function add(
   n1: number,
   n2: number,

@@ -55,3 +55,18 @@ user1.greet('Hi there - I am');
 //When you define something as an interface, it's super clear
 //that you want to define the structure of an object with that.
 //
+
+//Interfaces as function types
+//----------------------------
+//this use-case is a little bit more exotic, but good to know,
+//the type version of it is more commonly used: 
+//type addFunction = (a: number, b: number) => number; (one already known approach)
+
+interface addFunction {
+  (a: number, b: number): number;
+}
+
+let add: addFunction;
+add = (a: number, b: number) => {
+  return a + b;
+}
