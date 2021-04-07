@@ -65,6 +65,7 @@ class ITDepartment extends Department { //you can only inherit from one class
 
 class AccountingDepartment extends Department {
   private lastReport: string;
+  private static instance: AccountingDepartment;
 
   //getters and setters:
   //access private properties and adding extra logic
@@ -86,9 +87,22 @@ class AccountingDepartment extends Department {
     this.addReport(value);
   }
 
-  constructor(id: string, private reports: string[]) {
+  //For Singleton:
+  //make constructor private
+  //create a method that check 
+  //if there is an existing instance
+  //and make one if not
+  private constructor(id: string, private reports: string[]) {
     super(id, 'Accounting');
     this.lastReport = reports[0];
+  }
+
+  static getInstance() {
+    if(AccountingDepartment.instance) {
+      return this.instance;
+    }
+    this.instance = new AccountingDepartment('d2', []);
+    return this.instance;
   }
 
   describe() {
@@ -118,7 +132,8 @@ it.addEmployee('Foo');
 it.addEmployee('Bartendr');
 console.log(it);
 
-const accDep = new AccountingDepartment('acc', []);
+//const accDep = new AccountingDepartment('acc', []);
+const accDep = AccountingDepartment.getInstance();
 accDep.addReport('something went wrong');
 accDep.addEmployee('Adam');
 accDep.addEmployee('Tadam');
@@ -131,6 +146,16 @@ console.log(accDep);
   accounting.describe();
   accounting.printEmployeeInformation();
 */
+
+//PRIVATE CONSTRUCTORS + SINGLETON PATTERN
+//Singleton pattern is about ensuring that you only have
+//one instantiation of a certain class.
+//useful when you somehow can't use static methods/properties
+//or you don't want to, but at the same time
+//you want to make sure that you can't create multiple
+//objects based on a class but you always have exactly one object
+//based on a class
+//eg.: we only want 1 AccountingDepartment
 
 //ABSTRACT CLASSES:
 //-----------------

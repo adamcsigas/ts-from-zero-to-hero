@@ -65,6 +65,11 @@ var ITDepartment = /** @class */ (function (_super) {
 }(Department));
 var AccountingDepartment = /** @class */ (function (_super) {
     __extends(AccountingDepartment, _super);
+    //For Singleton:
+    //make constructor private
+    //create a method that check 
+    //if there is an existing instance
+    //and make one if not
     function AccountingDepartment(id, reports) {
         var _this = _super.call(this, id, 'Accounting') || this;
         _this.reports = reports;
@@ -92,6 +97,13 @@ var AccountingDepartment = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    AccountingDepartment.getInstance = function () {
+        if (AccountingDepartment.instance) {
+            return this.instance;
+        }
+        this.instance = new AccountingDepartment('d2', []);
+        return this.instance;
+    };
     AccountingDepartment.prototype.describe = function () {
         console.log('Accounting Department: ID' + this.id);
     };
@@ -115,7 +127,8 @@ var it = new ITDepartment('devs', ['Foo', 'Bartendr']);
 it.addEmployee('Foo');
 it.addEmployee('Bartendr');
 console.log(it);
-var accDep = new AccountingDepartment('acc', []);
+//const accDep = new AccountingDepartment('acc', []);
+var accDep = AccountingDepartment.getInstance();
 accDep.addReport('something went wrong');
 accDep.addEmployee('Adam');
 accDep.addEmployee('Tadam');
@@ -127,6 +140,15 @@ console.log(accDep);
   accounting.describe();
   accounting.printEmployeeInformation();
 */
+//PRIVATE CONSTRUCTORS + SINGLETON PATTERN
+//Singleton pattern is about ensuring that you only have
+//one instantiation of a certain class.
+//useful when you somehow can't use static methods/properties
+//or you don't want to, but at the same time
+//you want to make sure that you can't create multiple
+//objects based on a class but you always have exactly one object
+//based on a class
+//eg.: we only want 1 AccountingDepartment
 //ABSTRACT CLASSES:
 //-----------------
 //abstract classes cannot be instantiated
