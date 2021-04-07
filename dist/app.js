@@ -1,6 +1,7 @@
 "use strict";
 var Department = /** @class */ (function () {
     function Department(n) {
+        this.employees = []; //private is a so called access modifier by default this is public
         this.name = n;
     }
     Department.prototype.describe = function () {
@@ -9,11 +10,32 @@ var Department = /** @class */ (function () {
         //outside of this class' scope
         //'this.' refers back to the instanced class!
     };
+    Department.prototype.addEmployee = function (employee) {
+        //validation...
+        this.employees.push(employee);
+    };
+    Department.prototype.printEmployeeInformation = function () {
+        console.log(this.employees.length);
+        console.log(this.employees);
+    };
     return Department;
 }());
 var accounting = new Department('Accounting');
-console.log(accounting);
+accounting.addEmployee('Foo');
+accounting.addEmployee('Bar');
 accounting.describe();
+accounting.printEmployeeInformation();
+//the problem here by default, that we could access
+//and modify employees information from the outside:
+//like: accounting.employees[2] = 'Tibee';
+//It is a good practice to have one uniform way to modify data
+//also a method might envolve some extra logic
+//which would not execute if you just add an element to the array
+//like a validation process
+//to make some restriction you can use private access modifier
+//note: this only works in TS-land in runtime accounting.employees[2] = 'Tibee';
+//would execute without an error since private added to JS just recently
+//and TS only knows this because it checks during compilation
 //THIS keyword:
 //----
 //rule of thumb: this typically refers to the thing
@@ -33,8 +55,10 @@ accounting.describe();
 //adding what 'this' refers to to describe() and TS will throw
 //an error to you. adding name property to the object
 //and it will work just fine again:
-var accountingCopy = { name: 'DUMMY', describe: accounting.describe };
-accountingCopy.describe();
+/*
+  const accountingCopy = { name: 'DUMMY', describe: accounting.describe };
+  accountingCopy.describe();
+*/
 //-------------
 //Good to know:
 //after compilation to JS some interesting things happen in case of ES5:
