@@ -26,6 +26,9 @@ var Department = /** @class */ (function () {
         this.employees = []; //protected: also available in classes which are extended from this class
         //this.name = n;
     }
+    Department.createEmployee = function (name) {
+        return { name: name };
+    };
     Department.prototype.describe = function () {
         console.log("Department (" + this.id + "): " + this.name);
         //you have to use 'this.' keyword otherwise it will going to look for a global variable
@@ -43,6 +46,7 @@ var Department = /** @class */ (function () {
     return Department;
 }());
 //INHERITANCE:
+//------------
 //In case we have a specific type of department
 //which has the same properties as Department class
 //but actually has more specific fields or methods
@@ -121,6 +125,17 @@ accounting.addEmployee('Foo');
 accounting.addEmployee('Bar');
 accounting.describe();
 accounting.printEmployeeInformation();
+//STATIC PROPERTIES/METHODS:
+//--------------------------
+//these are props and methods that are not accessed
+//on the instances of the class but which you access
+//directly on the class. eg.: Math constructor function in JS
+//in constructor you cannot access them with the 'this'
+//keyword because the whole idea behind it to detach
+//from instances
+var employee = Department.createEmployee('John');
+//ACCESS MODIFIERS:
+//-----------------
 //the problem here by default, that we could access
 //and modify employees information from the outside:
 //like: accounting.employees[2] = 'Tibee';
@@ -132,8 +147,8 @@ accounting.printEmployeeInformation();
 //note: this only works in TS-land in runtime accounting.employees[2] = 'Tibee';
 //would execute without an error since private added to JS just recently
 //and TS only knows this because it checks during compilation
-//THIS keyword:
-//----
+//THIS KEYWORD:
+//-------------
 //rule of thumb: this typically refers to the thing
 //which is responsible for calling the method in this case accountingCopy
 //and accountingCopy doesn't have a name property
@@ -155,7 +170,7 @@ accounting.printEmployeeInformation();
   const accountingCopy = { name: 'DUMMY', describe: accounting.describe };
   accountingCopy.describe();
 */
-//-------------
+//--------------------------------------------------------------------------
 //Good to know:
 //after compilation to JS some interesting things happen in case of ES5:
 //something called constructor function which've been around quite some time
@@ -170,3 +185,4 @@ var Department = (function () {
 var accounting = new Department('Accounting');
 console.log(accounting);
 */
+//---------------------------------------------------------------------------
