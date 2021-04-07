@@ -1,4 +1,17 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var Department = /** @class */ (function () {
     //this is a so called utility function which has been called when the class is instantiated
     //readonly: only exists in TS, after initialization it's value cannot be changed
@@ -27,6 +40,48 @@ var Department = /** @class */ (function () {
     };
     return Department;
 }());
+//INHERITANCE:
+//In case we have a specific type of department
+//which has the same properties as Department class
+//but actually has more specific fields or methods
+//inheritance can be used.
+//TLDR; base methods => Department, specialized version => base + specific stuff
+//------------
+var ITDepartment = /** @class */ (function (_super) {
+    __extends(ITDepartment, _super);
+    function ITDepartment(id, admins) {
+        var _this = 
+        //every time you create a custom constructor in an inherited class
+        //you have to call super first and execute it like a function
+        //super calls the constructor of the base class (Department)
+        _super.call(this, id, 'IT') || this;
+        _this.admins = admins;
+        return _this;
+    }
+    return ITDepartment;
+}(Department));
+var AccountingDepartment = /** @class */ (function (_super) {
+    __extends(AccountingDepartment, _super);
+    function AccountingDepartment(id, reports) {
+        var _this = _super.call(this, id, 'Accounting') || this;
+        _this.reports = reports;
+        return _this;
+    }
+    AccountingDepartment.prototype.addReport = function (text) {
+        this.reports.push(text);
+    };
+    AccountingDepartment.prototype.printReports = function () {
+        console.log(this.reports);
+    };
+    return AccountingDepartment;
+}(Department));
+var it = new ITDepartment('devs', ['Foo', 'Bartendr']);
+it.addEmployee('Foo');
+it.addEmployee('Bartendr');
+console.log(it);
+var accDep = new AccountingDepartment('acc', []);
+accDep.addReport('something went wrong');
+console.log(accDep);
 var accounting = new Department('godlike', 'Accounting');
 accounting.addEmployee('Foo');
 accounting.addEmployee('Bar');

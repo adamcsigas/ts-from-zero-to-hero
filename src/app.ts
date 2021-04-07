@@ -28,11 +28,53 @@ class Department {
   }
 }
 
-const accounting = new Department('godlike', 'Accounting');
+//INHERITANCE:
+//In case we have a specific type of department
+//which has the same properties as Department class
+//but actually has more specific fields or methods
+//inheritance can be used.
+//TLDR; base methods => Department, specialized version => base + specific stuff
+//------------
 
+class ITDepartment extends Department { //you can only inherit from one class
+  //as longs as nothing added here it will work just as Department
+  admins: string[];
+
+  constructor(id: string, admins: string[]) {
+    //every time you create a custom constructor in an inherited class
+    //you have to call super first and execute it like a function
+    //super calls the constructor of the base class (Department)
+    super(id, 'IT');
+    this.admins = admins;
+  }
+}
+
+class AccountingDepartment extends Department {
+    constructor(id: string, private reports: string[]) {
+      super(id, 'Accounting');
+    }
+
+    addReport(text: string) {
+      this.reports.push(text);
+    }
+
+    printReports(this: AccountingDepartment) {
+      console.log(this.reports);
+    }
+}
+
+const it = new ITDepartment('devs', ['Foo', 'Bartendr']);
+it.addEmployee('Foo');
+it.addEmployee('Bartendr');
+console.log(it);
+
+const accDep = new AccountingDepartment('acc', []);
+accDep.addReport('something went wrong');
+console.log(accDep);
+
+const accounting = new Department('godlike', 'Accounting');
 accounting.addEmployee('Foo');
 accounting.addEmployee('Bar');
-
 accounting.describe();
 accounting.printEmployeeInformation();
 //the problem here by default, that we could access
