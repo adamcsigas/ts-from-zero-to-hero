@@ -14,20 +14,24 @@
 //you can merge as many interfaces together as many you want
 //you can implement as many interfaces into your class as many you need
 interface Named {
-  readonly name: string; //readonly has an effect on the class as well which implements the interface!
+  readonly name?: string; //readonly has an effect on the class as well which implements the interface!
+  outputName?: string; //optional parameter
 }
 
 //idea behind it: you can typecheck an object
 interface Greetable extends Named {
   greet(phrase: string): void;
+  optionalFunction?(): void;//methods can be optional too
 }
 
 class Person implements Greetable {
-  name: string;
+  name?: string;
   age = 29;
 
-  constructor(n: string) {
-    this.name = n;
+  constructor(n?: string) {
+    if(n) {
+      this.name = n;
+    }
   }
 
   greet(phrase: string) {
