@@ -1,3 +1,4 @@
+export default '';
 const button = document.querySelector('button')!; //with the ! I tell TS this button indeed going to exist
 
 button.addEventListener('click', () => {

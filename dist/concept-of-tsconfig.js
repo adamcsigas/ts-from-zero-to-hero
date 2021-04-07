@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = '';
 var button = document.querySelector('button'); //with the ! I tell TS this button indeed going to exist
 button.addEventListener('click', function () {
     console.log('it works');
