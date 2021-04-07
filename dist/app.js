@@ -21,7 +21,9 @@ var Department = /** @class */ (function () {
         this.name = name;
         //private readonly id: string;
         //private name: string; this is not a property but a field
-        this.employees = []; //private is a so called access modifier by default this is public
+        //private is a so called access modifier by default this is public.
+        //only available in the class where declared
+        this.employees = []; //protected: also available in classes which are extended from this class
         //this.name = n;
     }
     Department.prototype.describe = function () {
@@ -67,6 +69,13 @@ var AccountingDepartment = /** @class */ (function (_super) {
         _this.reports = reports;
         return _this;
     }
+    //if you want to override a base method you can do that by redefining it (polymorphism)
+    AccountingDepartment.prototype.addEmployee = function (name) {
+        if (name === 'Adam') {
+            return;
+        }
+        this.employees.push(name);
+    };
     AccountingDepartment.prototype.addReport = function (text) {
         this.reports.push(text);
     };
@@ -81,6 +90,8 @@ it.addEmployee('Bartendr');
 console.log(it);
 var accDep = new AccountingDepartment('acc', []);
 accDep.addReport('something went wrong');
+accDep.addEmployee('Adam');
+accDep.addEmployee('Tadam');
 console.log(accDep);
 var accounting = new Department('godlike', 'Accounting');
 accounting.addEmployee('Foo');

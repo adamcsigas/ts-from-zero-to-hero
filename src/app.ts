@@ -1,7 +1,9 @@
 class Department {
   //private readonly id: string;
   //private name: string; this is not a property but a field
-  private employees: string[] = []; //private is a so called access modifier by default this is public
+  //private is a so called access modifier by default this is public.
+  //only available in the class where declared
+  protected employees: string[] = []; //protected: also available in classes which are extended from this class
 
   //this is a so called utility function which has been called when the class is instantiated
   //readonly: only exists in TS, after initialization it's value cannot be changed
@@ -54,6 +56,14 @@ class AccountingDepartment extends Department {
       super(id, 'Accounting');
     }
 
+    //if you want to override a base method you can do that by redefining it (polymorphism)
+    addEmployee(name: string) {
+      if(name === 'Adam') {
+        return;
+      }
+      this.employees.push(name);
+    }
+
     addReport(text: string) {
       this.reports.push(text);
     }
@@ -70,6 +80,8 @@ console.log(it);
 
 const accDep = new AccountingDepartment('acc', []);
 accDep.addReport('something went wrong');
+accDep.addEmployee('Adam');
+accDep.addEmployee('Tadam');
 console.log(accDep);
 
 const accounting = new Department('godlike', 'Accounting');
