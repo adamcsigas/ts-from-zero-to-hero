@@ -69,7 +69,7 @@ console.log(secondPerson);
 //will create a copy of the pointer which points to the same data in the heap
 //this can have unexpected behaviours if you don't know what you're doing
 //what if you really want to copy an object?
-var thirdPerson = Object.assign({}, person);
+// let thirdPerson = Object.assign({},person);
 //here with Object. we create a new object
 //the assign() method allows you to merge 2 objects into one
 //the first argument can be ANY object, it doesn't have to be a new or empty one!
