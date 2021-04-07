@@ -52,25 +52,49 @@ class ITDepartment extends Department { //you can only inherit from one class
 }
 
 class AccountingDepartment extends Department {
-    constructor(id: string, private reports: string[]) {
-      super(id, 'Accounting');
-    }
+  private lastReport: string;
 
-    //if you want to override a base method you can do that by redefining it (polymorphism)
-    addEmployee(name: string) {
-      if(name === 'Adam') {
-        return;
-      }
-      this.employees.push(name);
-    }
+  //getters and setters:
+  //access private properties and adding extra logic
+  //that should run when you read/set a property
 
-    addReport(text: string) {
-      this.reports.push(text);
+  //getter method
+  get mostRecentReport() {
+    if(this.lastReport) {
+      return this.lastReport;
     }
+    throw new Error('No report found.');
+  }
 
-    printReports(this: AccountingDepartment) {
-      console.log(this.reports);
+  //setter method
+  set mostRecentReport(value: string) {
+    if(!value) {
+      throw new Error('Please pass in a valid value');
     }
+    this.addReport(value);
+  }
+
+  constructor(id: string, private reports: string[]) {
+    super(id, 'Accounting');
+    this.lastReport = reports[0];
+  }
+
+  //if you want to override a base method you can do that by redefining it (polymorphism)
+  addEmployee(name: string) {
+    if(name === 'Adam') {
+      return;
+    }
+    this.employees.push(name);
+  }
+
+  addReport(text: string) {
+    this.reports.push(text);
+    this.lastReport = text;
+  }
+
+  printReports(this: AccountingDepartment) {
+    console.log(this.reports);
+  }
 }
 
 const it = new ITDepartment('devs', ['Foo', 'Bartendr']);

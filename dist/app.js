@@ -67,8 +67,30 @@ var AccountingDepartment = /** @class */ (function (_super) {
     function AccountingDepartment(id, reports) {
         var _this = _super.call(this, id, 'Accounting') || this;
         _this.reports = reports;
+        _this.lastReport = reports[0];
         return _this;
     }
+    Object.defineProperty(AccountingDepartment.prototype, "mostRecentReport", {
+        //getters and setters:
+        //access private properties and adding extra logic
+        //that should run when you read/set a property
+        //getter method
+        get: function () {
+            if (this.lastReport) {
+                return this.lastReport;
+            }
+            throw new Error('No report found.');
+        },
+        //setter method
+        set: function (value) {
+            if (!value) {
+                throw new Error('Please pass in a valid value');
+            }
+            this.addReport(value);
+        },
+        enumerable: true,
+        configurable: true
+    });
     //if you want to override a base method you can do that by redefining it (polymorphism)
     AccountingDepartment.prototype.addEmployee = function (name) {
         if (name === 'Adam') {
@@ -78,6 +100,7 @@ var AccountingDepartment = /** @class */ (function (_super) {
     };
     AccountingDepartment.prototype.addReport = function (text) {
         this.reports.push(text);
+        this.lastReport = text;
     };
     AccountingDepartment.prototype.printReports = function () {
         console.log(this.reports);
