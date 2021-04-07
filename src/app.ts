@@ -1,4 +1,4 @@
-class Department {
+abstract class Department {
   //private readonly id: string;
   //private name: string; this is not a property but a field
   //private is a so called access modifier by default this is public.
@@ -8,7 +8,7 @@ class Department {
   //this is a so called utility function which has been called when the class is instantiated
   //readonly: only exists in TS, after initialization it's value cannot be changed
   //this adds some extra type safety to your code, make your intention extra clear
-  constructor(private readonly id: string, private name: string) { //shorthand initialization
+  constructor(protected readonly id: string, private name: string) { //shorthand initialization
     //this.name = n;
   }
 
@@ -16,12 +16,15 @@ class Department {
     return { name: name};
   }
 
+/*
   describe(this: Department) { //this is not an actual param in this case but it tells what this in the method refers to!
     console.log(`Department (${this.id}): ${this.name}`);
     //you have to use 'this.' keyword otherwise it will going to look for a global variable
     //outside of this class' scope
     //'this.' refers back to the instanced class!
   }
+*/
+  abstract describe(this: Department): void;
 
   addEmployee(employee: string) {
     //validation...
@@ -54,6 +57,10 @@ class ITDepartment extends Department { //you can only inherit from one class
     super(id, 'IT');
     this.admins = admins;
   }
+
+  describe() {
+    console.log('IT Department - ID: ' + this.id);
+  }
 }
 
 class AccountingDepartment extends Department {
@@ -82,6 +89,10 @@ class AccountingDepartment extends Department {
   constructor(id: string, private reports: string[]) {
     super(id, 'Accounting');
     this.lastReport = reports[0];
+  }
+
+  describe() {
+    console.log('Accounting Department: ID' + this.id);
   }
 
   //if you want to override a base method you can do that by redefining it (polymorphism)
@@ -113,11 +124,31 @@ accDep.addEmployee('Adam');
 accDep.addEmployee('Tadam');
 console.log(accDep);
 
-const accounting = new Department('godlike', 'Accounting');
-accounting.addEmployee('Foo');
-accounting.addEmployee('Bar');
-accounting.describe();
-accounting.printEmployeeInformation();
+/*
+  const accounting = new Department('godlike', 'Accounting');
+  accounting.addEmployee('Foo');
+  accounting.addEmployee('Bar');
+  accounting.describe();
+  accounting.printEmployeeInformation();
+*/
+
+//ABSTRACT CLASSES:
+//-----------------
+//abstract classes cannot be instantiated
+//Eventhough override a method always there as an option but
+//sometimes you want to force the developer
+//to implement/override a method from the base class
+//when would you do that?
+//when you want to ensure that a certain method
+//is available in all classes based on some base class
+//but that you also know at the same time that the exact
+//implementation will depend on this specific version
+//so when you can't provide a general method but you
+//want to enforce that method exists but the inheriting class'
+//will need to provide it's own implementation because
+//you can't provide a default implementation in the base class
+
+
 
 //STATIC PROPERTIES/METHODS:
 //--------------------------

@@ -29,12 +29,6 @@ var Department = /** @class */ (function () {
     Department.createEmployee = function (name) {
         return { name: name };
     };
-    Department.prototype.describe = function () {
-        console.log("Department (" + this.id + "): " + this.name);
-        //you have to use 'this.' keyword otherwise it will going to look for a global variable
-        //outside of this class' scope
-        //'this.' refers back to the instanced class!
-    };
     Department.prototype.addEmployee = function (employee) {
         //validation...
         this.employees.push(employee);
@@ -64,6 +58,9 @@ var ITDepartment = /** @class */ (function (_super) {
         _this.admins = admins;
         return _this;
     }
+    ITDepartment.prototype.describe = function () {
+        console.log('IT Department - ID: ' + this.id);
+    };
     return ITDepartment;
 }(Department));
 var AccountingDepartment = /** @class */ (function (_super) {
@@ -95,6 +92,9 @@ var AccountingDepartment = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    AccountingDepartment.prototype.describe = function () {
+        console.log('Accounting Department: ID' + this.id);
+    };
     //if you want to override a base method you can do that by redefining it (polymorphism)
     AccountingDepartment.prototype.addEmployee = function (name) {
         if (name === 'Adam') {
@@ -120,11 +120,28 @@ accDep.addReport('something went wrong');
 accDep.addEmployee('Adam');
 accDep.addEmployee('Tadam');
 console.log(accDep);
-var accounting = new Department('godlike', 'Accounting');
-accounting.addEmployee('Foo');
-accounting.addEmployee('Bar');
-accounting.describe();
-accounting.printEmployeeInformation();
+/*
+  const accounting = new Department('godlike', 'Accounting');
+  accounting.addEmployee('Foo');
+  accounting.addEmployee('Bar');
+  accounting.describe();
+  accounting.printEmployeeInformation();
+*/
+//ABSTRACT CLASSES:
+//-----------------
+//abstract classes cannot be instantiated
+//Eventhough override a method always there as an option but
+//sometimes you want to force the developer
+//to implement/override a method from the base class
+//when would you do that?
+//when you want to ensure that a certain method
+//is available in all classes based on some base class
+//but that you also know at the same time that the exact
+//implementation will depend on this specific version
+//so when you can't provide a general method but you
+//want to enforce that method exists but the inheriting class'
+//will need to provide it's own implementation because
+//you can't provide a default implementation in the base class
 //STATIC PROPERTIES/METHODS:
 //--------------------------
 //these are props and methods that are not accessed
