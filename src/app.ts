@@ -1,13 +1,15 @@
 class Department {
-  name: string; //this is not a property but a field
+  //private id: string;
+  //private name: string; this is not a property but a field
   private employees: string[] = []; //private is a so called access modifier by default this is public
 
-  constructor(n: string) { //utility function which has been called when the class is instantiated
-    this.name = n;
+  //this is a so called utility function which has been called when the class is instantiated
+  constructor(private id: string, private name: string) { //shorthand initialization
+    //this.name = n;
   }
 
   describe(this: Department) { //this is not an actual param in this case but it tells what this in the method refers to!
-    console.log('Department: ' + this.name);
+    console.log(`Department (${this.id}): ${this.name}`);
     //you have to use 'this.' keyword otherwise it will going to look for a global variable
     //outside of this class' scope
     //'this.' refers back to the instanced class!
@@ -24,7 +26,7 @@ class Department {
   }
 }
 
-const accounting = new Department('Accounting');
+const accounting = new Department('godlike', 'Accounting');
 
 accounting.addEmployee('Foo');
 accounting.addEmployee('Bar');

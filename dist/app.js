@@ -1,11 +1,16 @@
 "use strict";
 var Department = /** @class */ (function () {
-    function Department(n) {
+    //this is a so called utility function which has been called when the class is instantiated
+    function Department(id, name) {
+        this.id = id;
+        this.name = name;
+        //private id: string;
+        //private name: string; this is not a property but a field
         this.employees = []; //private is a so called access modifier by default this is public
-        this.name = n;
+        //this.name = n;
     }
     Department.prototype.describe = function () {
-        console.log('Department: ' + this.name);
+        console.log("Department (" + this.id + "): " + this.name);
         //you have to use 'this.' keyword otherwise it will going to look for a global variable
         //outside of this class' scope
         //'this.' refers back to the instanced class!
@@ -20,7 +25,7 @@ var Department = /** @class */ (function () {
     };
     return Department;
 }());
-var accounting = new Department('Accounting');
+var accounting = new Department('godlike', 'Accounting');
 accounting.addEmployee('Foo');
 accounting.addEmployee('Bar');
 accounting.describe();
