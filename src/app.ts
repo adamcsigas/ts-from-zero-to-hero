@@ -1,10 +1,12 @@
 class Department {
-  //private id: string;
+  //private readonly id: string;
   //private name: string; this is not a property but a field
   private employees: string[] = []; //private is a so called access modifier by default this is public
 
   //this is a so called utility function which has been called when the class is instantiated
-  constructor(private id: string, private name: string) { //shorthand initialization
+  //readonly: only exists in TS, after initialization it's value cannot be changed
+  //this adds some extra type safety to your code, make your intention extra clear
+  constructor(private readonly id: string, private name: string) { //shorthand initialization
     //this.name = n;
   }
 

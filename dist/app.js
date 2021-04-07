@@ -1,10 +1,12 @@
 "use strict";
 var Department = /** @class */ (function () {
     //this is a so called utility function which has been called when the class is instantiated
+    //readonly: only exists in TS, after initialization it's value cannot be changed
+    //this adds some extra type safety to your code, make your intention extra clear
     function Department(id, name) {
         this.id = id;
         this.name = name;
-        //private id: string;
+        //private readonly id: string;
         //private name: string; this is not a property but a field
         this.employees = []; //private is a so called access modifier by default this is public
         //this.name = n;
