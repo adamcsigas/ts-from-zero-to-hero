@@ -73,6 +73,15 @@ textStorage.addItem('Adam');
 textStorage.addItem('Adam2');
 textStorage.addItem('Gowango');
 console.log(textStorage.getItems());
-//generic types are there to make your life easier and
-//and to give you that perfect combination of full flexibility
-//and type safety
+function createCourseGoal(title, description, date) {
+    let courseGoal = {}; //Partial tells TS this in the end, going to be a CourseGoal
+    //partial turns the inside type properties optional (temporarily), therefore we can have an empty object in this case
+    courseGoal.title = title;
+    courseGoal.description = description;
+    courseGoal.completeUntil = date;
+    return courseGoal; //you need typecasting in this case
+}
+//2.) Readonly<>
+const firstNames = ['Adam', 'Eve'];
+//firstNames.push();
+//firstNames.pop();

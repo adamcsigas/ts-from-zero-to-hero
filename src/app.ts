@@ -95,3 +95,33 @@ console.log(textStorage.getItems());
 //generic types are there to make your life easier and
 //and to give you that perfect combination of full flexibility
 //and type safety
+
+//UTILITY TYPES:
+//--------------
+//built-in generic types which give us some utility functionality
+//these types only exist in TS world
+
+//1.)Partial<>
+interface CourseGoal {
+  title: string;
+  description: string;
+  completeUntil: Date;
+}
+
+function createCourseGoal(
+  title: string,
+  description: string,
+  date: Date
+): CourseGoal {
+  let courseGoal: Partial<CourseGoal> = {}; //Partial tells TS this in the end, going to be a CourseGoal
+  //partial turns the inside type properties optional (temporarily), therefore we can have an empty object in this case
+  courseGoal.title = title;
+  courseGoal.description = description;
+  courseGoal.completeUntil = date;
+  return courseGoal as CourseGoal; //you need typecasting in this case
+}
+
+//2.) Readonly<>
+const firstNames: Readonly<string[]> = ['Adam','Eve'];
+//firstNames.push();
+//firstNames.pop();
