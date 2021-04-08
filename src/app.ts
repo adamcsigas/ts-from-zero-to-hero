@@ -183,3 +183,22 @@ const userInputElement2 = document.getElementById('input'); //by casting here yo
 if(userInputElement2) {
   (userInputElement2 as HTMLInputElement).value = 'My existance is unquestionable!';
 }
+
+//INDEX TYPES:
+//------------
+//use-case: I know the value type,
+//I don't know how many properties I will have,
+//what the name of the property will be.
+
+interface ErrorContainer { // {email: 'not a valid email', username: 'must start with a capital character'}
+  //id: string; //pre-defined properties are ok, as long as they have the same type as the index type
+  [prop: string]: string;
+  //With that I say I don't know the property name, and the count
+  //they will have a property name with a string value type
+  //note: It cannot be boolean!!!
+}
+
+const errorBag: ErrorContainer = {
+  email: 'Not a valid email!',
+  username: 'Must start with a capital character'
+}

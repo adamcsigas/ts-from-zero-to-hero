@@ -117,3 +117,7 @@ var userInputElement2 = document.getElementById('input'); //by casting here you 
 if (userInputElement2) {
     userInputElement2.value = 'My existance is unquestionable!';
 }
+var errorBag = {
+    email: 'Not a valid email!',
+    username: 'Must start with a capital character'
+};
