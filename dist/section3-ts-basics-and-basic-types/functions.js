@@ -18,17 +18,17 @@ function printResult(num) {
 //cb functions can return something, even if the argument on which they're passed
 //does NOT expect a returned value.
 function addAndHandle(n1, n2, callback) {
-    var result = n1 + n2;
+    const result = n1 + n2;
     callback(result);
 }
-addAndHandle(10, 20, function (result) {
+addAndHandle(10, 20, (result) => {
     console.log(result);
 });
 printResult(add(5, 12));
 //Functions as types called function type (dah!)
 //you can define a variable to be a function, and how it should look like
 //in other words: which type of functions we want to use somewhere
-var combineValues; //by that we say TS that we have a var which is a func that will take 2 params and will return with a number
+let combineValues; //by that we say TS that we have a var which is a func that will take 2 params and will return with a number
 combineValues = add;
 //combineValues = printResult;
 //combineValues = 5;

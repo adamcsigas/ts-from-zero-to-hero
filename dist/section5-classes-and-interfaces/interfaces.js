@@ -8,24 +8,23 @@
 //thing where as in abstract class you might have
 //some concrete implementation for a method
 //or have a concrete value for a property
-var Person = /** @class */ (function () {
-    function Person(n) {
+class Person {
+    constructor(n) {
         this.age = 29;
         if (n) {
             this.name = n;
         }
     }
-    Person.prototype.greet = function (phrase) {
-        console.log(phrase + " " + this.name);
-    };
-    return Person;
-}());
-var user1;
+    greet(phrase) {
+        console.log(`${phrase} ${this.name}`);
+    }
+}
+let user1;
 user1 = new Person('Adam');
 //user1.name = 'Tadam'; this will throw error because it's a readonly prop in the interface
 user1.greet('Hi there - I am');
-var add;
-add = function (a, b) {
+let add;
+add = (a, b) => {
     return a + b;
 };
 //Good to know notes:

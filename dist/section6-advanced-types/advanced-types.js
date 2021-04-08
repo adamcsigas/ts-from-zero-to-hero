@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = '';
 //they're closely related to interface inheritance
 //interface ElevatedEmployee extends Employee, Admin {}
-var employee1 = {
+const employee1 = {
     name: 'Adam',
     privileges: ['create-homepage'],
     startDate: new Date()
@@ -41,27 +41,21 @@ function printEmployeeInformation(emp) {
 //most of the time you can use the 'in' keyword
 //as well but this is a more elegant way and
 //can minimize the risk of typos
-var Car = /** @class */ (function () {
-    function Car() {
-    }
-    Car.prototype.drive = function () {
+class Car {
+    drive() {
         console.log('driving');
-    };
-    return Car;
-}());
-var Truck = /** @class */ (function () {
-    function Truck() {
     }
-    Truck.prototype.drive = function () {
+}
+class Truck {
+    drive() {
         console.log('Driving a truck...');
-    };
-    Truck.prototype.loadCargo = function (amount) {
+    }
+    loadCargo(amount) {
         console.log('Loading cargo ...' + amount);
-    };
-    return Truck;
-}());
-var v1 = new Car();
-var v2 = new Truck();
+    }
+}
+const v1 = new Car();
+const v2 = new Truck();
 function useVehicle(vehicle) {
     vehicle.drive();
     if (vehicle instanceof Truck) { //this is JS code
@@ -74,7 +68,7 @@ function useVehicle(vehicle) {
 useVehicle(v1);
 useVehicle(v2);
 function moveAnimal(animal) {
-    var speed;
+    let speed;
     switch (animal.type) {
         case 'bird':
             speed = animal.flyingSpeed;
@@ -109,16 +103,16 @@ moveAnimal({ type: 'bird', flyingSpeed: 30 });
   userInputElement.value = 'Hi there!'; //it works fine!
 */
 //2.)
-var userInputElement = document.getElementById('input'); //! for only demo purposes
+const userInputElement = document.getElementById('input'); //! for only demo purposes
 userInputElement.value = 'Hi there!'; //it works fine!
 //The ! tells TS that the variable will never going to be null
 //if we are not certain you can use an if check
-var userInputElement2 = document.getElementById('input'); //by casting here you would tell TS
+const userInputElement2 = document.getElementById('input'); //by casting here you would tell TS
 //it will never going to be null!
 if (userInputElement2) {
     userInputElement2.value = 'My existance is unquestionable!';
 }
-var errorBag = {
+const errorBag = {
     email: 'Not a valid email!',
     username: 'Must start with a capital character'
 };
@@ -133,13 +127,13 @@ function adding(a, b) {
 //if want to do stuff with the returned value.
 //We know in fact that in this case the return value will be either a string or a number,
 //and if we want to call built in functions like split(), TS will throw an error.
-var result = adding('Foo', ' bar');
+const result = adding('Foo', ' bar');
 result.split(' ');
 //OPTIONAL CHAINING:
 //------------------
 //Useful if you cannot tell with certainty
 //if in an object a property is existing or not
-var fetchedUserData = {
+const fetchedUserData = {
     id: 'u1',
     name: 'Adam',
     job: { title: 'developer', description: 'frontend developer' }
@@ -154,5 +148,5 @@ console.log((_a = fetchedUserData.job) === null || _a === void 0 ? void 0 : _a.t
 //loosely related to optional chaining
 //usecase: when you need to check if whether the value
 // is null/undefined or valid data
-var userInput = ''; //for the sake of the example imagine this data comes from the backend
-var storedData = userInput !== null && userInput !== void 0 ? userInput : 'DEFAULT'; //when you specifically want to check if the data is null or undefined
+const userInput = ''; //for the sake of the example imagine this data comes from the backend
+const storedData = userInput !== null && userInput !== void 0 ? userInput : 'DEFAULT'; //when you specifically want to check if the data is null or undefined

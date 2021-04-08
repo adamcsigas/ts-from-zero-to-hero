@@ -1,26 +1,11 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = '';
-var Department = /** @class */ (function () {
+class Department {
     //this is a so called utility function which has been called when the class is instantiated
     //readonly: only exists in TS, after initialization it's value cannot be changed
     //this adds some extra type safety to your code, make your intention extra clear
-    function Department(id, name) {
+    constructor(id, name) {
         this.id = id;
         this.name = name;
         //private readonly id: string;
@@ -30,19 +15,18 @@ var Department = /** @class */ (function () {
         this.employees = []; //protected: also available in classes which are extended from this class
         //this.name = n;
     }
-    Department.createEmployee = function (name) {
+    static createEmployee(name) {
         return { name: name };
-    };
-    Department.prototype.addEmployee = function (employee) {
+    }
+    addEmployee(employee) {
         //validation...
         this.employees.push(employee);
-    };
-    Department.prototype.printEmployeeInformation = function () {
+    }
+    printEmployeeInformation() {
         console.log(this.employees.length);
         console.log(this.employees);
-    };
-    return Department;
-}());
+    }
+}
 //INHERITANCE:
 //------------
 //In case we have a specific type of department
@@ -51,88 +35,77 @@ var Department = /** @class */ (function () {
 //inheritance can be used.
 //TLDR; base methods => Department, specialized version => base + specific stuff
 //------------
-var ITDepartment = /** @class */ (function (_super) {
-    __extends(ITDepartment, _super);
-    function ITDepartment(id, admins) {
-        var _this = 
+class ITDepartment extends Department {
+    constructor(id, admins) {
         //every time you create a custom constructor in an inherited class
         //you have to call super first and execute it like a function
         //super calls the constructor of the base class (Department)
-        _super.call(this, id, 'IT') || this;
-        _this.admins = admins;
-        return _this;
+        super(id, 'IT');
+        this.admins = admins;
     }
-    ITDepartment.prototype.describe = function () {
+    describe() {
         console.log('IT Department - ID: ' + this.id);
-    };
-    return ITDepartment;
-}(Department));
-var AccountingDepartment = /** @class */ (function (_super) {
-    __extends(AccountingDepartment, _super);
+    }
+}
+class AccountingDepartment extends Department {
     //For Singleton:
     //make constructor private
     //create a method that check 
     //if there is an existing instance
     //and make one if not
-    function AccountingDepartment(id, reports) {
-        var _this = _super.call(this, id, 'Accounting') || this;
-        _this.reports = reports;
-        _this.lastReport = reports[0];
-        return _this;
+    constructor(id, reports) {
+        super(id, 'Accounting');
+        this.reports = reports;
+        this.lastReport = reports[0];
     }
-    Object.defineProperty(AccountingDepartment.prototype, "mostRecentReport", {
-        //getters and setters:
-        //access private properties and adding extra logic
-        //that should run when you read/set a property
-        //getter method
-        get: function () {
-            if (this.lastReport) {
-                return this.lastReport;
-            }
-            throw new Error('No report found.');
-        },
-        //setter method
-        set: function (value) {
-            if (!value) {
-                throw new Error('Please pass in a valid value');
-            }
-            this.addReport(value);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    AccountingDepartment.getInstance = function () {
+    //getters and setters:
+    //access private properties and adding extra logic
+    //that should run when you read/set a property
+    //getter method
+    get mostRecentReport() {
+        if (this.lastReport) {
+            return this.lastReport;
+        }
+        throw new Error('No report found.');
+    }
+    //setter method
+    set mostRecentReport(value) {
+        if (!value) {
+            throw new Error('Please pass in a valid value');
+        }
+        this.addReport(value);
+    }
+    static getInstance() {
         if (AccountingDepartment.instance) {
             return this.instance;
         }
         this.instance = new AccountingDepartment('d2', []);
         return this.instance;
-    };
-    AccountingDepartment.prototype.describe = function () {
+    }
+    describe() {
         console.log('Accounting Department: ID' + this.id);
-    };
+    }
     //if you want to override a base method you can do that by redefining it (polymorphism)
-    AccountingDepartment.prototype.addEmployee = function (name) {
+    addEmployee(name) {
         if (name === 'Adam') {
             return;
         }
         this.employees.push(name);
-    };
-    AccountingDepartment.prototype.addReport = function (text) {
+    }
+    addReport(text) {
         this.reports.push(text);
         this.lastReport = text;
-    };
-    AccountingDepartment.prototype.printReports = function () {
+    }
+    printReports() {
         console.log(this.reports);
-    };
-    return AccountingDepartment;
-}(Department));
-var it = new ITDepartment('devs', ['Foo', 'Bartendr']);
+    }
+}
+const it = new ITDepartment('devs', ['Foo', 'Bartendr']);
 it.addEmployee('Foo');
 it.addEmployee('Bartendr');
 console.log(it);
 //const accDep = new AccountingDepartment('acc', []);
-var accDep = AccountingDepartment.getInstance();
+const accDep = AccountingDepartment.getInstance();
 accDep.addReport('something went wrong');
 accDep.addEmployee('Adam');
 accDep.addEmployee('Tadam');
@@ -176,7 +149,7 @@ console.log(accDep);
 //in constructor you cannot access them with the 'this'
 //keyword because the whole idea behind it to detach
 //from instances
-var employee = Department.createEmployee('John');
+const employee = Department.createEmployee('John');
 //ACCESS MODIFIERS:
 //-----------------
 //the problem here by default, that we could access

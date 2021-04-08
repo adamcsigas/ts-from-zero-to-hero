@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = '';
 function add(n1, n2, showResult, phrase) {
-    var result = n1 + n2;
+    const result = n1 + n2;
     if (showResult) {
         console.log(phrase + result);
     }
@@ -18,9 +18,9 @@ function add(n1, n2, showResult, phrase) {
 // and of course you could give it's type explicitly like let number1: number = 5 (the code will not rely on type inference
 // in this case)
 // but that is unnecessary since TS can perfectly tell what is the type is going to be (reduntant code)
-var number1 = 5;
-var number2 = 2.8;
-var printResult = typeof number1 === 'number' && typeof number2 === 'number';
-var resultPhrase = 'Result is: ';
-var result = add(number1, number2, printResult, resultPhrase);
+const number1 = 5;
+const number2 = 2.8;
+const printResult = typeof number1 === 'number' && typeof number2 === 'number';
+const resultPhrase = 'Result is: ';
+const result = add(number1, number2, printResult, resultPhrase);
 console.log(result);

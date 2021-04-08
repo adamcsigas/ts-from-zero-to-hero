@@ -3,17 +3,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = '';
 //This file is just a documentation of the following video:
 //https://www.youtube.com/watch?v=9ooYYRLdg_g - reference vs primitive values/types
-var someValue = 'hello';
+let someValue = 'hello';
 console.log(someValue);
 //output: 'hello'
-var someOtherValue = someValue;
+let someOtherValue = someValue;
 console.log(someOtherValue);
 //output: 'hello' 'hello'
 someValue = 'world';
 console.log(someOtherValue);
 //output: 'hello' 'hello' 'hello'
 // ----
-var person = {
+let person = {
     age: 29,
     name: 'Adam',
     hobbies: ['sauna', 'biking']
@@ -21,7 +21,7 @@ var person = {
 console.log(person);
 //output: 
 // { age: 29, name: 'Adam', hobbies: ['sauna', 'biking']}
-var secondPerson = person;
+let secondPerson = person;
 console.log(secondPerson);
 //output: 
 // { age: 29, name: 'Adam', hobbies: ['sauna', 'biking']}
@@ -79,6 +79,6 @@ console.log(secondPerson);
 //you can work around it
 //or use third party libraries like lodash which has deepclone function
 //what if you want to copy an array in the object?
-var myUpToDateHobbies = person.hobbies.slice();
+let myUpToDateHobbies = person.hobbies.slice();
 //by not giving any arguments, slice will create a new array
 //and push all the values from the other array

@@ -3,7 +3,7 @@
 //let's say we want to add two values. not only numbers but strings as well (like concat)
 //in this case we can use union type: number | string for instance
 function combine(input1, input2, resultConversion) {
-    var result;
+    let result;
     if (typeof input1 === 'number' && typeof input2 === 'number' || resultConversion === 'as-number') {
         result = +input1 + +input2; //+ sign before a variable converts the variable into a number, like parseFloat()
     }
@@ -17,9 +17,9 @@ function combine(input1, input2, resultConversion) {
         return result.toString();
       } */
 }
-var combinedAges = combine(30, 26, 'as-number');
+const combinedAges = combine(30, 26, 'as-number');
 console.log(combinedAges);
-var combinedNames = combine('Adam', 'Yolo', 'as-text');
+const combinedNames = combine('Adam', 'Yolo', 'as-text');
 console.log(combinedNames);
-var combinedStringAges = combine('30', '26', 'as-number');
+const combinedStringAges = combine('30', '26', 'as-number');
 console.log(combinedStringAges);

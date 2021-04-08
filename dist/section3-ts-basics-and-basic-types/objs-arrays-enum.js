@@ -41,7 +41,7 @@ var Role;
 //behind the scenes every element recieves an index by default ADMIN the number 0, READ_ONLY the number 1 and so on
 //if you need different behaviour you can change the number simply: ADMIN = 5. 
 //after that the upcoming element will be 6 and so on
-var person = {
+const person = {
     name: 'Adam',
     age: 29,
     hobbies: [
@@ -56,13 +56,12 @@ var person = {
 //typescript type inference works it says role can be a type of string | number[]
 //but we explicitly want to override it
 //with tuple types of the elements and the length is fixated
-var favoriteActivities;
+let favoriteActivities;
 favoriteActivities = ['sports'];
 console.log(person.name);
 //typescript inference can tell that a hobby is going to be a string, so all
 //built in string function will be available
-for (var _i = 0, _a = person.hobbies; _i < _a.length; _i++) {
-    var hobby = _a[_i];
+for (const hobby of person.hobbies) {
     console.log(hobby.toUpperCase());
     //but for instance we would get an error on console.log(hobby.map());
 }

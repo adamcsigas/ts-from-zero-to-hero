@@ -8,8 +8,8 @@ exports.default = '';
 //we don't know what the datatype will be, but we know what we eventually want to do with it
 //with unknown first we have to check the type we store *example1*
 //it will not throw an error
-var userInput;
-var userName;
+let userInput;
+let userName;
 userInput = 5;
 userInput = 'Adam';
 //*example1*
@@ -34,5 +34,5 @@ function generateError(message, code) {
         errorCode: code,
     };
 }
-var result = generateError('An error occured', 500);
+const result = generateError('An error occured', 500);
 console.log(result);
