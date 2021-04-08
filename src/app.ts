@@ -43,7 +43,7 @@ type Universal = Combinable & Numeric; //in this case number
 //But what exactly you do with the values then does depend
 //on the type.
 
-//examples of type guards:
+//types of type guards:
 
 //1.) typeof
 function add(a: Combinable, b: Combinable) {
@@ -108,3 +108,36 @@ function useVehicle(vehicle: Vehicle) {
 
 useVehicle(v1);
 useVehicle(v2);
+
+//DISCRIMINATED UNION:
+//--------------------
+//it's a pattern which you can use when working with union types.
+//This pattern makes implementing type guards easier.
+//It is available when you work with object types.
+//also minimize the risk of typos!
+
+interface Bird {
+  type: 'bird'; //type field here created to make type guarding in moveAnimal() easier
+  flyingSpeed: number;
+}
+
+interface Horse {
+  type: 'horse';
+  runningSpeed: number;
+}
+
+type Animal = Bird | Horse;
+
+function moveAnimal(animal: Animal) {
+  let speed;
+  switch (animal.type) {
+    case 'bird':
+      speed = animal.flyingSpeed;
+      break;
+    case 'horse':
+      speed = animal.runningSpeed;
+  }
+  console.log('Moving at speed: ' + speed);
+}
+
+moveAnimal({type: 'bird', flyingSpeed: 30});
