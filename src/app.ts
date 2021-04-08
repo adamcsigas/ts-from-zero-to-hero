@@ -141,3 +141,45 @@ function moveAnimal(animal: Animal) {
 }
 
 moveAnimal({type: 'bird', flyingSpeed: 30});
+
+//TYPE CASTING:
+//TC helps you tell TS that some value is of a specific type
+//where TS is not able to detect on it's own but you know its
+//going to be the case
+
+//good example for this is if we get access to something in the DOM!
+//const userInputElement = document.getElementById('input')!;
+
+//if you use queryselector then TS will know that
+//its type going to be: HTMLInputElement | null
+//but if you use getElementById for instance, things get interesting
+//because TS can't tell, it doesn't read our HTML code
+//so it only knows that it will be an HTMLElement
+
+//if we want to set value property would error
+//because .value is not specific to any HTMLElement!
+//userInputElement.value = 'Hi there!';
+//output: Property 'value' does not exist on type 'HTMLElement'.ts(2339)
+
+//type casting for the win! Both approach is considered ok, just
+//be consistent about it.
+
+//1.)
+//since this syntax has a different meaning in react JS provides another way see in 2.)
+/*
+  const userInputElement = <HTMLInputElement>document.getElementById('input')!;
+  userInputElement.value = 'Hi there!'; //it works fine!
+*/
+
+//2.)
+const userInputElement = document.getElementById('input')! as HTMLInputElement; //! for only demo purposes
+userInputElement.value = 'Hi there!'; //it works fine!
+
+//The ! tells TS that the variable will never going to be null
+//if we are not certain you can use an if check
+const userInputElement2 = document.getElementById('input'); //by casting here you would tell TS
+//it will never going to be null!
+
+if(userInputElement2) {
+  (userInputElement2 as HTMLInputElement).value = 'My existance is unquestionable!';
+}
