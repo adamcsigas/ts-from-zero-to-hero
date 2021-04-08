@@ -1,4 +1,5 @@
 "use strict";
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = '';
 //they're closely related to interface inheritance
@@ -127,10 +128,24 @@ function adding(a, b) {
     }
     return a + b;
 }
-//for instance here, by default TS will say the return type will be Combinable.
+//for instance here, by default TS will say here that the return type will be Combinable.
 //which is technically true, but we might want to be more specific, especially
 //if want to do stuff with the returned value.
 //We know in fact that in this case the return value will be either a string or a number,
 //and if we want to call built in functions like split(), TS will throw an error.
 var result = adding('Foo', ' bar');
 result.split(' ');
+//OPTIONAL CHAINING:
+//------------------
+//Useful if you cannot tell with certainty
+//if in an object a property is existing or not
+var fetchedUserData = {
+    id: 'u1',
+    name: 'Adam',
+    job: { title: 'developer', description: 'frontend developer' }
+};
+//the JS way is:
+//console.log(fetchedUserData.job && fetchedUserData.job.title);
+//in TS you have the optional chaining operator:
+//you put ? after the thing you are not sure if it exists
+console.log((_a = fetchedUserData.job) === null || _a === void 0 ? void 0 : _a.title);

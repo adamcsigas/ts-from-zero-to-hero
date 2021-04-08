@@ -10,6 +10,11 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
+var __spreadArray = (this && this.__spreadArray) || function (to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+        to[j] = from[i];
+    return to;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = '';
 //arrays and objects:
@@ -24,7 +29,7 @@ var activeHobbies = ['hiking'];
 //more on that: reference-vs-primitives.ts
 activeHobbies.push.apply(activeHobbies, hobbies);
 //or when you assign a new array you can just spread the values in it like this
-var myOtherHobbies = ['swimming'].concat(hobbies);
+var myOtherHobbies = __spreadArray(['swimming'], hobbies);
 //this of course also works on objects
 var yetAnotherPerson = {
     name: 'Adam',
