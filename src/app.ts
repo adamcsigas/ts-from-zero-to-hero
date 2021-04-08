@@ -61,3 +61,37 @@ console.log(countAndDescribe(['yo','wow','foo'])); // got 3 characters
 function extractAndConvert<T extends object, U extends keyof T>(obj: T, key: U) {
   return 'Value: ' + obj[key];
 }
+
+//Generic Classes
+//flexible and strongly typed
+//cons: this works perfectly with primitive values
+//but you will run into troubles if you start to work with
+//reference values like objects or arrays
+
+class DataStorage<T extends string | number | boolean> {
+  private data: T[] = [];
+
+  addItem(item: T) {
+    this.data.push(item);
+  }
+
+  removeItem(item: T) {
+    this.data.splice(this.data.indexOf(item), 1);
+  }
+
+  getItems() {
+    return [...this.data];
+  }
+}
+
+const textStorage = new DataStorage<string>();
+
+textStorage.addItem('Adam');
+textStorage.addItem('Adam2');
+textStorage.addItem('Gowango');
+
+console.log(textStorage.getItems());
+
+//generic types are there to make your life easier and
+//and to give you that perfect combination of full flexibility
+//and type safety

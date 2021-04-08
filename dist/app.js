@@ -49,3 +49,30 @@ console.log(countAndDescribe(['yo', 'wow', 'foo'])); // got 3 characters
 function extractAndConvert(obj, key) {
     return 'Value: ' + obj[key];
 }
+//Generic Classes
+//flexible and strongly typed
+//cons: this works perfectly with primitive values
+//but you will run into troubles if you start to work with
+//reference values like objects or arrays
+class DataStorage {
+    constructor() {
+        this.data = [];
+    }
+    addItem(item) {
+        this.data.push(item);
+    }
+    removeItem(item) {
+        this.data.splice(this.data.indexOf(item), 1);
+    }
+    getItems() {
+        return [...this.data];
+    }
+}
+const textStorage = new DataStorage();
+textStorage.addItem('Adam');
+textStorage.addItem('Adam2');
+textStorage.addItem('Gowango');
+console.log(textStorage.getItems());
+//generic types are there to make your life easier and
+//and to give you that perfect combination of full flexibility
+//and type safety
