@@ -43,3 +43,9 @@ function countAndDescribe(element) {
 }
 console.log(countAndDescribe('Hi there!')); // got 9 characters
 console.log(countAndDescribe(['yo', 'wow', 'foo'])); // got 3 characters
+//The "keyof" constraint
+//memo: what problem would raise
+//if params would be (obj:object, key:string) ?
+function extractAndConvert(obj, key) {
+    return 'Value: ' + obj[key];
+}

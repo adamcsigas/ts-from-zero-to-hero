@@ -55,3 +55,9 @@ function countAndDescribe<T extends Lengthy>(element: T): [T, string] {
 console.log(countAndDescribe('Hi there!')); // got 9 characters
 console.log(countAndDescribe(['yo','wow','foo'])); // got 3 characters
 
+//The "keyof" constraint
+//memo: what problem would raise
+//if params would be (obj:object, key:string) ?
+function extractAndConvert<T extends object, U extends keyof T>(obj: T, key: U) {
+  return 'Value: ' + obj[key];
+}
