@@ -242,3 +242,15 @@ const fetchedUserData = {
 //in TS you have the optional chaining operator:
 //you put ? after the thing you are not sure if it exists
 console.log(fetchedUserData.job?.title);
+
+//NULLISH COALESCING
+//------------------
+//loosely related to optional chaining
+//usecase: when you need to check if whether the value
+// is null/undefined or valid data
+
+const userInput = ''; //for the sake of the example imagine this data comes from the backend
+
+const storedData = userInput ?? 'DEFAULT'; //when you specifically want to check if the data is null or undefined
+
+

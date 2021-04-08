@@ -149,3 +149,10 @@ var fetchedUserData = {
 //in TS you have the optional chaining operator:
 //you put ? after the thing you are not sure if it exists
 console.log((_a = fetchedUserData.job) === null || _a === void 0 ? void 0 : _a.title);
+//NULLISH COALESCING
+//------------------
+//loosely related to optional chaining
+//usecase: when you need to check if whether the value
+// is null/undefined or valid data
+var userInput = ''; //for the sake of the example imagine this data comes from the backend
+var storedData = userInput !== null && userInput !== void 0 ? userInput : 'DEFAULT'; //when you specifically want to check if the data is null or undefined
