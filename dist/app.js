@@ -21,6 +21,9 @@ promise.then(data => {
     data.split(' ');
 });
 //Build custom generic function:
+//TYPE CONSTRAINTS:
+//<T, U> if you want that the generic types here could be
+//any type of object: <T extends object, U extends object>
 //Example: a function that merges two objects
 function merge(objectA, objectB) {
     return Object.assign(objectA, objectB);
@@ -31,3 +34,12 @@ const mergedObj = merge({ name: 'Adam' }, { age: 29 });
 //so in this case of mergedObj.name, TS wouldn't know the specifics
 //of the returned object
 console.log(mergedObj.name);
+function countAndDescribe(element) {
+    let descriptionText = 'Got no value.';
+    if (element.length > 0) {
+        descriptionText = 'Got ' + element.length + ' elements';
+    }
+    return [element, descriptionText];
+}
+console.log(countAndDescribe('Hi there!')); // got 9 characters
+console.log(countAndDescribe(['yo', 'wow', 'foo'])); // got 3 characters
