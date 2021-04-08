@@ -121,3 +121,16 @@ var errorBag = {
     email: 'Not a valid email!',
     username: 'Must start with a capital character'
 };
+function adding(a, b) {
+    if (typeof a === 'string' || typeof b === 'string') {
+        return a.toString() + b.toString();
+    }
+    return a + b;
+}
+//for instance here, by default TS will say the return type will be Combinable.
+//which is technically true, but we might want to be more specific, especially
+//if want to do stuff with the returned value.
+//We know in fact that in this case the return value will be either a string or a number,
+//and if we want to call built in functions like split(), TS will throw an error.
+var result = adding('Foo', ' bar');
+result.split(' ');

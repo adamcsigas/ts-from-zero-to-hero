@@ -201,4 +201,27 @@ interface ErrorContainer { // {email: 'not a valid email', username: 'must start
 const errorBag: ErrorContainer = {
   email: 'Not a valid email!',
   username: 'Must start with a capital character'
+};
+
+//FUNCTION OVERLOADS:
+//-------------------
+//it comes handy when TS not quite get the return type
+
+function adding(a: number, b: number): number;
+function adding(a: number, b: string): string;
+function adding(a: string, b: number): string;
+function adding(a: string, b: string): string;
+function adding(a: Combinable, b: Combinable) {
+  if(typeof a === 'string' || typeof b === 'string') {
+    return a.toString() + b.toString();
+  }
+  return a + b;
 }
+//for instance here, by default TS will say the return type will be Combinable.
+//which is technically true, but we might want to be more specific, especially
+//if want to do stuff with the returned value.
+//We know in fact that in this case the return value will be either a string or a number,
+//and if we want to call built in functions like split(), TS will throw an error.
+
+const result = adding('Foo', ' bar');
+result.split(' ');
