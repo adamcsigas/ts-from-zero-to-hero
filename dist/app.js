@@ -20,3 +20,14 @@ const promise = new Promise((resolve, reject) => {
 promise.then(data => {
     data.split(' ');
 });
+//Build custom generic function:
+//Example: a function that merges two objects
+function merge(objectA, objectB) {
+    return Object.assign(objectA, objectB);
+}
+//if you would give objA and objB parameters the type object which would be two unknown object
+//the return also would be an unknown object
+const mergedObj = merge({ name: 'Adam' }, { age: 29 });
+//so in this case of mergedObj.name, TS wouldn't know the specifics
+//of the returned object
+console.log(mergedObj.name);
