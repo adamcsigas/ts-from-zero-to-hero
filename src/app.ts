@@ -1,36 +1,36 @@
-//Decorators:
-//It useful for meta-programming.
-//The main idea is to write code which then
-//easier to use by other developers.
-//we can guarantee that a class, a method in a class,
-//functions, hidden transformations etc.
-// will be used correctly
-
-//DECORATOR:
-//----------
+//DECORATOR-FACTORY:
 /*
-The end of the day a decorator is just a function which you
-apply to something (eg. class) in a certain way.
-Decorators execute NOT when your class is instantiated
-BUT when your class is defined!
-Decorators run when JS finds your class/constructor function
-definition.
+  returns a decorator function
+  but allows us to configure it
+  when we assign it as a decorator to something.
+  As a first example, we take decorator-sample1.ts
+  and convert Logger into a factory.
 */
-
-//Starting with a capital is not a must have thing
-//but lot of 3rd party libraries creating decorators like that.
-/*
-decorators recieve arguments. The number of arguments
-depends on where you use them. In this first example
-it will be used on a class, the argument will be
-the target AKA constructor function
-*/
-function Logger(constructor: Function) {
-  console.log('Logging...');
-  console.log(constructor);
+function Logger(logString: string) {
+  return function(constructor: Function) {
+    console.log(logString);
+    console.log(constructor);
+  };
 }
 
-@Logger
+function WithTemplate(template: string, hookId: string) {
+  return function(constructor: any) {
+    //if you're not interested in of the constructor function
+    //you can use _ as an argument name to let TS know
+
+    const hookEl = document.getElementById(hookId);
+    //you can also get access to constructor functions' variables
+    const p = new constructor();
+    if(hookEl) {
+      hookEl.innerHTML = template;
+      //for demo purposes let assume that h1 always exists
+      hookEl.querySelector('h1')!.textContent = p.name;
+    }
+  }
+}
+
+//@Logger('Logging...')
+@WithTemplate('<h1>My Person Object</h1>', 'app')
 class Person {
   name = 'Adam';
 
