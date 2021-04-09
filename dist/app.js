@@ -54,6 +54,14 @@ function extractAndConvert(obj, key) {
 //cons: this works perfectly with primitive values
 //but you will run into troubles if you start to work with
 //reference values like objects or arrays
+//Generic types vs Union Types:
+//First glance generic types and union types
+//might seem to achieve the same thing, but that's
+//not the case!
+//In case of DataStorage:
+//Union type is great if you want to have functions
+//which would accept string | number | boolean every time.
+//Generic type is great if you want to lock in on a type.
 class DataStorage {
     constructor() {
         this.data = [];
