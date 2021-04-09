@@ -1,13 +1,6 @@
 "use strict";
-//Interface:
-//----------
-//describe how an object should look like
-//without concrete values.
-//it might look like an abstract class
-//but in interface you don't have any concrete
-//thing where as in abstract class you might have
-//some concrete implementation for a method
-//or have a concrete value for a property
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = '';
 class Person {
     constructor(n) {
         this.age = 29;

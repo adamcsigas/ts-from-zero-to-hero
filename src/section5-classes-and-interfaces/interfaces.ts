@@ -1,3 +1,4 @@
+export default '';
 //Interface:
 //----------
 //describe how an object should look like
