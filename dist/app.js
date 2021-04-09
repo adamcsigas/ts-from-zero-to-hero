@@ -125,3 +125,66 @@ __decorate([
     Log3,
     __param(0, Log4)
 ], Product.prototype, "getPriceWithTax", null);
+/*
+  You can return values on the following decorators:
+  - class decorator
+  - method decorators - Log3
+  - accessor decorators - Log2
+*/
+//Creating an "Autobind" Decorator
+//--------------------------------
+function Autobind(_, _2, descriptor) {
+    const originalMethod = descriptor.value;
+    const adjustedDescriptor = {
+        configurable: true,
+        enumerable: false,
+        get() {
+            const boundFn = originalMethod.bind(this);
+            //What does "this" refers to, here?
+            //TLDR; we ensure that "this" will always refer to the exact same object
+            //as the original method
+            /*
+              We are inside of the getter method, so "this" will
+              refer to whatever is responsible for triggering the get()
+              method.
+              This is the trick: getter method will be triggered
+              by the concrete object to which it's belongs. So
+              "this" inside of the getter method will always refer
+              to the object on which we defined the get().
+      
+              This will not overwritten by addEventListener, because
+              the getter is like an extra layer between our function
+              that's being executed, the object to which it belongs
+              and the eventListener.
+            */
+            return boundFn;
+        },
+    };
+    return adjustedDescriptor;
+}
+class Printer {
+    constructor() {
+        this.message = 'This works!';
+    }
+    showMessage() {
+        console.log(this.message);
+    }
+}
+__decorate([
+    Autobind
+], Printer.prototype, "showMessage", null);
+const p = new Printer();
+const button = document.querySelector('button');
+button.addEventListener('click', p.showMessage);
+//output: undefined
+/*
+  within addEventListener, if we point at a function
+  that should be executed (showMessage) the "this" keyword
+  inside of that function will not have the same
+  context/reference as we call just p.showMessage.
+  In this case "this" will refer to the target of the event!
+  Because addEventListener binds the "this" keyword
+  to the target of the event.
+  Common workaround: p.showMessage.bind(p)
+  You can also build a decorator to do this!
+*/
