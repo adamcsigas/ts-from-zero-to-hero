@@ -14,15 +14,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
   and convert Logger into a factory.
 */
 function Logger(logString) {
+    console.log('logger factory');
     return function (constructor) {
         console.log(logString);
         console.log(constructor);
     };
 }
 function WithTemplate(template, hookId) {
+    console.log('template factory');
     return function (constructor) {
         //if you're not interested in of the constructor function
         //you can use _ as an argument name to let TS know
+        console.log('rendering template');
         const hookEl = document.getElementById(hookId);
         //you can also get access to constructor functions' variables
         const p = new constructor();
@@ -33,7 +36,6 @@ function WithTemplate(template, hookId) {
         }
     };
 }
-//@Logger('Logging...')
 let Person = class Person {
     constructor() {
         this.name = 'Adam';
@@ -41,7 +43,16 @@ let Person = class Person {
     }
 };
 Person = __decorate([
+    Logger('Logging...'),
     WithTemplate('<h1>My Person Object</h1>', 'app')
 ], Person);
 const pers = new Person();
 console.log(pers);
+//execution order:
+/*
+- creation of the factory function happens in the order you specify
+the factory functions. Logger --> WithTemplate
+- but the execution of the actual decorator functions then happens
+bottom up! WithTemplate --> Logger
+
+*/
