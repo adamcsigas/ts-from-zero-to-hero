@@ -126,3 +126,15 @@ __decorate([
     Log3,
     __param(0, Log4)
 ], Product.prototype, "getPriceWithTax", null);
+//When do decorators execute?
+//---------------------------
+/*
+  Every decorator runs without instantiating the class.
+  Decorators are not eventlisteners! They are functions
+  that executes when your class is defined, and then
+  you can use the decorator to do some behind the scenes
+  work.
+  For example:
+  - To setup some code that should run whenever this is called
+  - To add extra meta-data or store some data property somewhere else
+*/
